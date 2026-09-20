@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 function getTransport() {
   const port = Number(process.env.SMTP_PORT ?? 465);
   const host = process.env.SMTP_HOST;
+  const servername = process.env.SMTP_TLS_SERVERNAME ?? host;
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASSWORD;
 
@@ -12,7 +13,8 @@ function getTransport() {
     host,
     port,
     secure: process.env.SMTP_SECURE === "true",
-    auth: { user, pass }
+    auth: { user, pass },
+    tls: { servername }
   });
 }
 
