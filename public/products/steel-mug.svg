@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675" role="img" aria-label="ماگ استیل">
+  <rect width="900" height="675" fill="#101F37"/>
+  <ellipse cx="430" cy="198" rx="150" ry="45" fill="#E9EDF0"/>
+  <path d="M280 198h300l-35 310c-8 42-222 42-230 0l-35-310z" fill="#DCE3E8"/>
+  <ellipse cx="430" cy="198" rx="112" ry="25" fill="#071A2C"/>
+  <path d="M575 262c72-17 116 13 113 77-3 74-64 112-145 96l11-70c43 11 70-3 72-31 1-25-16-35-60-25l9-47z" fill="none" stroke="#E9EDF0" stroke-width="38" stroke-linecap="round"/>
+  <path d="M342 323h176v21H342zM371 376h118v18H371z" fill="#071A2C"/>
+</svg>

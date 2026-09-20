@@ -1,0 +1,8 @@
+.next
+node_modules
+.env
+.env*.local
+.playwright-cli/
+coverage
+dist
+*.log

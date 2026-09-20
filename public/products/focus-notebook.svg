@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675" role="img" aria-label="دفترچه تمرکز">
+  <rect width="900" height="675" fill="#101F37"/>
+  <path d="M294 111h340c31 0 56 25 56 56v362c0 31-25 56-56 56H294c-31 0-56-25-56-56V167c0-31 25-56 56-56z" fill="#E9EDF0"/>
+  <path d="M294 111h68v474h-68c-31 0-56-25-56-56V167c0-31 25-56 56-56z" fill="#C8D1D9"/>
+  <path d="M408 218h210v20H408zM408 276h168v16H408zM408 324h168v16H408z" fill="#071A2C"/>
+  <g fill="#071A2C" opacity=".42">
+    <circle cx="421" cy="405" r="6"/><circle cx="468" cy="405" r="6"/><circle cx="515" cy="405" r="6"/><circle cx="562" cy="405" r="6"/><circle cx="609" cy="405" r="6"/>
+    <circle cx="421" cy="452" r="6"/><circle cx="468" cy="452" r="6"/><circle cx="515" cy="452" r="6"/><circle cx="562" cy="452" r="6"/><circle cx="609" cy="452" r="6"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675" role="img" aria-label="تیشرت تکنوکرات">
+  <rect width="900" height="675" fill="#101F37"/>
+  <path d="M258 156l105-48c38 42 136 42 174 0l105 48 78 132-95 58-50-72v245H325V274l-50 72-95-58 78-132z" fill="#E9EDF0"/>
+  <path d="M365 111c21 28 149 28 170 0l-21 83c-31 19-97 19-128 0l-21-83z" fill="#C9D2D9"/>
+  <path d="M393 330h114v23H393zM365 381h170v18H365z" fill="#071A2C"/>
+  <circle cx="450" cy="248" r="38" fill="none" stroke="#071A2C" stroke-width="16"/>
+  <path d="M430 248h40" stroke="#071A2C" stroke-width="16" stroke-linecap="round"/>
+</svg>
