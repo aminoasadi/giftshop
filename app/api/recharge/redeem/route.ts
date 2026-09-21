@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/lib/auth";
+import { publicUrl } from "@/lib/http";
 import { redeemRechargeCode } from "@/lib/services/recharge";
 
 export async function POST(request: NextRequest) {
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
     return result.ok ? NextResponse.json(result) : NextResponse.json(result, { status: 400 });
   }
 
-  const url = new URL("/dashboard", request.url);
+  const url = publicUrl(request, "/dashboard");
   url.searchParams.set(result.ok ? "charged" : "error", result.ok ? String(result.amount) : result.message);
   return NextResponse.redirect(url, { status: 303 });
 }
