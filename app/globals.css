@@ -556,12 +556,12 @@ textarea {
 }
 
 .login-layout > .dbr-chamfer-shell:has(> .login-card) {
-  height: 100%;
+  min-height: 100%;
   align-self: stretch;
 }
 
 .login-layout > .dbr-chamfer-shell:has(> .login-card) > .login-card {
-  height: 100%;
+  min-height: 100%;
 }
 
 .login-intro {
@@ -597,6 +597,11 @@ textarea {
   max-width: none;
   align-content: center;
   justify-self: stretch;
+  min-height: 472px;
+}
+
+.login-card form {
+  align-content: start;
 }
 
 .login-card .eyebrow {
@@ -749,5 +754,6 @@ textarea {
   .login-card {
     max-width: none;
     justify-self: stretch;
+    min-height: 0;
   }
 }
