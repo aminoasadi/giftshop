@@ -5,7 +5,7 @@ import { getPublicProductBySlug } from "@/lib/catalog";
 import { formatCredits, toPersianDigits } from "@/lib/persian";
 import { shopConfig } from "@/lib/config";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = params;

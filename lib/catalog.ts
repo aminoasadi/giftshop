@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { demoCategories, demoProducts, type PublicCategory, type PublicProduct } from "@/lib/demo-data";
 
@@ -28,10 +29,8 @@ function filterDemoProducts(query: ProductQuery) {
   return sortProducts(filtered, query.sort).slice(0, query.take ?? filtered.length);
 }
 
-export async function getPublicProducts(query: ProductQuery = {}): Promise<PublicProduct[]> {
-  if (shouldUseDemoCatalog()) return filterDemoProducts(query);
-
-  try {
+const getCachedPublicProducts = unstable_cache(
+  async (query: ProductQuery) => {
     const products = await prisma.product.findMany({
       where: {
         isActive: true,
@@ -44,6 +43,40 @@ export async function getPublicProducts(query: ProductQuery = {}): Promise<Publi
       orderBy: query.sort === "cheap" ? { priceCredits: "asc" } : query.sort === "expensive" ? { priceCredits: "desc" } : { createdAt: "desc" }
     });
     return products;
+  },
+  ["public-products"],
+  { revalidate: 120 }
+);
+
+const getCachedPublicCategories = unstable_cache(
+  async () => prisma.category.findMany({ orderBy: { name: "asc" } }),
+  ["public-categories"],
+  { revalidate: 300 }
+);
+
+const getCachedPublicProductBySlug = unstable_cache(
+  async (slug: string) => {
+    const product = await prisma.product.findUnique({
+      where: { slug },
+      include: { images: true, category: true }
+    });
+    if (!product || !product.isActive || product.deletedAt) return null;
+    return product;
+  },
+  ["public-product-by-slug"],
+  { revalidate: 300 }
+);
+
+export async function getPublicProducts(query: ProductQuery = {}): Promise<PublicProduct[]> {
+  if (shouldUseDemoCatalog()) return filterDemoProducts(query);
+
+  try {
+    return await getCachedPublicProducts({
+      q: query.q?.trim() || undefined,
+      category: query.category || undefined,
+      sort: query.sort || undefined,
+      take: query.take
+    });
   } catch {
     return filterDemoProducts(query);
   }
@@ -53,7 +86,7 @@ export async function getPublicCategories(): Promise<PublicCategory[]> {
   if (shouldUseDemoCatalog()) return demoCategories;
 
   try {
-    return await prisma.category.findMany({ orderBy: { name: "asc" } });
+    return await getCachedPublicCategories();
   } catch {
     return demoCategories;
   }
@@ -63,12 +96,7 @@ export async function getPublicProductBySlug(slug: string): Promise<PublicProduc
   if (shouldUseDemoCatalog()) return demoProducts.find((product) => product.slug === slug) ?? null;
 
   try {
-    const product = await prisma.product.findUnique({
-      where: { slug },
-      include: { images: true, category: true }
-    });
-    if (!product || !product.isActive || product.deletedAt) return null;
-    return product;
+    return await getCachedPublicProductBySlug(slug);
   } catch {
     return demoProducts.find((product) => product.slug === slug) ?? null;
   }

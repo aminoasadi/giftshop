@@ -7,7 +7,7 @@ import { shopConfig } from "@/lib/config";
 import { getPublicProducts } from "@/lib/catalog";
 import { formatCredits } from "@/lib/persian";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export default async function HomePage() {
   const products = await getPublicProducts();

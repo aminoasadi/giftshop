@@ -2,7 +2,7 @@ import { ProductCard } from "@/components/product-card";
 import { SiteHeader } from "@/components/site-header";
 import { getPublicCategories, getPublicProducts } from "@/lib/catalog";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export default async function ProductsPage({ searchParams }: { searchParams: { q?: string; category?: string; sort?: string } }) {
   const params = searchParams;
