@@ -45,7 +45,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
         </section>
 
         <section className="grid gap-6">
-          <div className="glass-soft feature-card p-6" data-chamfer="tr" data-cut="32" data-radius="12" data-fillet="10">
+          <div className="glass-soft feature-card p-6" data-chamfer="br" data-cut="32" data-radius="12" data-fillet="10">
             <div className="mb-5 flex items-center justify-between">
               <h2 className="text-2xl font-extrabold text-chrome">تراکنش‌ها</h2>
               <span className="text-sm text-muted">{toPersianDigits(user?.transactions.length ?? 0)} مورد اخیر</span>
@@ -61,7 +61,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
             </div>
           </div>
 
-          <div className="glass-soft feature-card p-6" data-chamfer="tr" data-cut="32" data-radius="12" data-fillet="10">
+          <div className="glass-soft feature-card p-6" data-chamfer="br" data-cut="32" data-radius="12" data-fillet="10">
             <h2 className="mb-5 text-2xl font-extrabold text-chrome">سفارش‌ها</h2>
             <div className="grid gap-2">
               {user?.orders.map((order) => (
