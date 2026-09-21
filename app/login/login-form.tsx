@@ -36,6 +36,7 @@ export function LoginForm({ callbackUrl = "/dashboard", defaultMode = "otp" }: {
         event.preventDefault();
         const form = new FormData(event.currentTarget);
         setError("");
+        const destination = mode === "password" ? "/admin" : callbackUrl;
 
         if (mode === "password") {
           startTransition(async () => {
@@ -43,13 +44,13 @@ export function LoginForm({ callbackUrl = "/dashboard", defaultMode = "otp" }: {
               email,
               password: form.get("password"),
               redirect: false,
-              callbackUrl
+              callbackUrl: destination
             });
             if (result?.error) {
               setError("ایمیل یا رمز عبور درست نیست.");
               return;
             }
-            router.push(result?.url ?? callbackUrl);
+            router.push(result?.url ?? destination);
             router.refresh();
           });
           return;
@@ -64,13 +65,13 @@ export function LoginForm({ callbackUrl = "/dashboard", defaultMode = "otp" }: {
             email,
             otp: form.get("otp"),
             redirect: false,
-            callbackUrl
+            callbackUrl: destination
           });
           if (result?.error) {
             setError("کد واردشده درست نیست یا اعتبارش تمام شده است.");
             return;
           }
-          router.push(result?.url ?? callbackUrl);
+          router.push(result?.url ?? destination);
           router.refresh();
         });
       }}
