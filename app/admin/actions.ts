@@ -23,7 +23,7 @@ const noticePath = {
 async function requireAdmin() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect("/login?next=/admin");
-  if (session.user.role !== Role.ADMIN) redirect("/dashboard");
+  if (session.user.role !== Role.ADMIN) redirect("/login?next=/admin");
   return session.user.id;
 }
 

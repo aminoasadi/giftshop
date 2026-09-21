@@ -42,7 +42,7 @@ function persianDate(value: Date) {
 export default async function AdminPage({ searchParams }: { searchParams: { notice?: string } }) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect("/login?next=/admin");
-  if (session.user.role !== Role.ADMIN) redirect("/dashboard");
+  if (session.user.role !== Role.ADMIN) redirect("/login?next=/admin");
 
   const [users, orders, products, pendingOrders, charged, rechargeCodes, recentOrders, recentUsers, categories] = await Promise.all([
     prisma.user.count(),
