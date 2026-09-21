@@ -1,4 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import bcrypt from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
@@ -14,12 +15,24 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: { label: "ایمیل", type: "email" },
-        otp: { label: "کد ورود", type: "text" }
+        otp: { label: "کد ورود", type: "text" },
+        password: { label: "رمز عبور", type: "password" }
       },
       async authorize(credentials) {
         const email = credentials?.email?.toLowerCase().trim();
         const otp = credentials?.otp?.trim() ?? "";
-        if (!email || !otp) return null;
+        const password = credentials?.password ?? "";
+        if (!email) return null;
+
+        if (password) {
+          const user = await prisma.user.findUnique({ where: { email } });
+          if (!user?.passwordHash) return null;
+          const passwordIsValid = await bcrypt.compare(password, user.passwordHash);
+          if (!passwordIsValid) return null;
+          return { id: user.id, email: user.email, name: user.name, role: user.role };
+        }
+
+        if (!otp) return null;
         const user = await consumeEmailOtp(email, otp);
         if (!user) return null;
         return { id: user.id, email: user.email, name: user.name, role: user.role };

@@ -1,12 +1,12 @@
 import { RechargeCodeStatus, WalletTransactionType } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { normalizeDigits } from "@/lib/persian";
+import { normalizeRechargeCode } from "@/lib/persian";
 import { canRedeemCode } from "@/lib/domain/wallet-engine";
 
 const MAX_FAILED_ATTEMPTS = 7;
 
 export async function redeemRechargeCode({ userId, rawCode, ip }: { userId: string; rawCode: string; ip?: string }) {
-  const code = normalizeDigits(rawCode);
+  const code = normalizeRechargeCode(rawCode);
 
   const recentFailures = await prisma.rechargeAttempt.count({
     where: {

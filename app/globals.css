@@ -648,6 +648,31 @@ textarea {
   font-size: 14px;
 }
 
+.admin-page {
+  display: grid;
+  gap: 0;
+}
+
+.admin-card {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  min-height: 100%;
+}
+
+.admin-order {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-notice {
+  border-inline-start: 2px solid var(--dbr-chrome-1);
+  background: rgba(214, 222, 228, .08);
+  color: var(--chrome);
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

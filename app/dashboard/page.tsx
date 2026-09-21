@@ -32,9 +32,9 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
           <h1 className="chrome-title text-4xl">{formatCredits(user?.wallet?.balance ?? 0)}</h1>
           <form action="/api/recharge/redeem" method="post" className="mt-8 grid gap-3">
             <label className="text-sm text-muted" htmlFor="code">
-              کد شارژ ۵ یا ۶ رقمی
+              کد شارژ پنج‌کاراکتری
             </label>
-            <input className="input text-left" dir="ltr" id="code" name="code" inputMode="numeric" placeholder="12345" required />
+            <input className="input text-left" dir="ltr" id="code" name="code" maxLength={6} placeholder="A1B2C" required />
             <button className="button" type="submit">
               شارژ کیف پول
             </button>

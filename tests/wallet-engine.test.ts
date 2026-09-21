@@ -1,16 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { OrderStatus, RechargeCodeStatus } from "@prisma/client";
 import { canRedeemCode, canRefundOrder, nextBalanceForPurchase } from "@/lib/domain/wallet-engine";
-import { normalizeDigits } from "@/lib/persian";
+import { normalizeDigits, normalizeRechargeCode } from "@/lib/persian";
 
 describe("recharge code rules", () => {
-  it("accepts a valid active 5 or 6 digit code", () => {
+  it("accepts a valid active 5 or 6 character code", () => {
     expect(canRedeemCode({ code: "12345", status: RechargeCodeStatus.ACTIVE, valueCredits: 500 }).ok).toBe(true);
     expect(canRedeemCode({ code: "123456", status: RechargeCodeStatus.ACTIVE, valueCredits: 500 }).ok).toBe(true);
+    expect(canRedeemCode({ code: "A1B2C", status: RechargeCodeStatus.ACTIVE, valueCredits: 500 }).ok).toBe(true);
   });
 
   it("normalizes Persian and Latin code input", () => {
     expect(normalizeDigits("۱۲۳45")).toBe("12345");
+    expect(normalizeRechargeCode("ab-۱۲۳")).toBe("AB123");
   });
 
   it("rejects reused, disabled, expired or malformed codes", () => {

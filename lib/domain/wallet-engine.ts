@@ -8,7 +8,7 @@ export type RechargeInput = {
 };
 
 export function canRedeemCode(input: RechargeInput, now = new Date()) {
-  if (!/^\d{5,6}$/.test(input.code)) return { ok: false as const, reason: "INVALID_FORMAT" };
+  if (!/^[A-Z0-9]{5,6}$/.test(input.code)) return { ok: false as const, reason: "INVALID_FORMAT" };
   if (input.status !== RechargeCodeStatus.ACTIVE) return { ok: false as const, reason: "NOT_ACTIVE" };
   if (input.expiresAt && input.expiresAt <= now) return { ok: false as const, reason: "EXPIRED" };
   if (input.valueCredits <= 0) return { ok: false as const, reason: "INVALID_VALUE" };

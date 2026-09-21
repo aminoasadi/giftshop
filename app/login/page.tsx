@@ -2,7 +2,9 @@ import { SiteHeader } from "@/components/site-header";
 import { ShieldCheck, WalletCards } from "lucide-react";
 import { LoginForm } from "./login-form";
 
-export default function LoginPage() {
+export default function LoginPage({ searchParams }: { searchParams: { next?: string } }) {
+  const isAdminLogin = searchParams.next === "/admin";
+
   return (
     <>
       <SiteHeader />
@@ -27,9 +29,9 @@ export default function LoginPage() {
           </section>
 
           <section className="glass feature-card login-card w-full p-8 md:p-10" data-chamfer="br" data-cut="36" data-radius="12" data-fillet="11">
-            <p className="eyebrow">ورود با کد یک‌بارمصرف</p>
+            <p className="eyebrow">{isAdminLogin ? "ورود ادمین با رمز" : "ورود با کد یک‌بارمصرف"}</p>
             <h2 className="chrome-title mb-7 text-3xl">ورود به حساب کاربری</h2>
-            <LoginForm />
+            <LoginForm callbackUrl={isAdminLogin ? "/admin" : "/dashboard"} defaultMode={isAdminLogin ? "password" : "otp"} />
           </section>
         </div>
       </main>

@@ -12,6 +12,14 @@ export function normalizeDigits(value: string) {
     .replace(/[^\d]/g, "");
 }
 
+export function normalizeRechargeCode(value: string) {
+  return value
+    .replace(/[۰-۹]/g, (digit) => String(persianDigits.indexOf(digit)))
+    .replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .toUpperCase();
+}
+
 export function formatCredits(value: number) {
   return `${toPersianDigits(new Intl.NumberFormat("fa-IR").format(value))} اعتبار`;
 }
