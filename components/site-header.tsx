@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LayoutDashboard, ShieldCheck, ShoppingBag } from "lucide-react";
+import { RechargeDialog } from "@/components/recharge-dialog";
 import { shopConfig } from "@/lib/config";
 
 export function SiteHeader() {
@@ -16,10 +17,7 @@ export function SiteHeader() {
         <Link href="/terms">قوانین اعتبار</Link>
         <Link href="/dashboard">داشبورد</Link>
       </nav>
-      <Link className="button secondary" href="/products">
-        <ShoppingBag size={18} />
-        خرید با اعتبار
-      </Link>
+      <RechargeDialog />
     </header>
   );
 }

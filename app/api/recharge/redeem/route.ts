@@ -6,9 +6,12 @@ import { redeemRechargeCode } from "@/lib/services/recharge";
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id) return NextResponse.json({ message: "ورود لازم است." }, { status: 401 });
-
   const contentType = request.headers.get("content-type") ?? "";
+  if (!session?.user?.id) {
+    if (contentType.includes("application/json")) return NextResponse.json({ message: "ورود لازم است." }, { status: 401 });
+    return NextResponse.redirect(publicUrl(request, "/login"), { status: 303 });
+  }
+
   const rawCode = contentType.includes("application/json")
     ? ((await request.json()) as { code?: string }).code
     : (await request.formData()).get("code")?.toString();

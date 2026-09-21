@@ -345,6 +345,37 @@ textarea {
   transform: scale(.985);
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(4, 16, 28, .72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-panel {
+  position: relative;
+  width: min(100%, 480px);
+}
+
+.modal-close {
+  position: absolute;
+  inset-block-start: 18px;
+  inset-inline-start: 18px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  background: rgba(4, 16, 28, .66);
+  color: var(--chrome);
+  cursor: pointer;
+}
+
 .hero-store {
   min-height: 680px;
   position: relative;
