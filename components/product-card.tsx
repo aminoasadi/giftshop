@@ -1,18 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { CSSProperties } from "react";
 import { ArrowLeft, WalletCards } from "lucide-react";
 import { formatCredits } from "@/lib/persian";
 import type { PublicProduct } from "@/lib/demo-data";
 
 export function ProductCard({ product }: { product: PublicProduct }) {
   const image = product.images[0];
-  const mediaStyle = image ? ({ "--halftone-mask": `url("${image.url}")` } as CSSProperties) : undefined;
 
   return (
     <article className="product-shell">
       <Link href={`/products/${product.slug}`} className="product-card feature-card block" data-chamfer="tr" data-cut="30" data-radius="12" data-fillet="10">
-        <div className="product-media" style={mediaStyle}>
+        <div className="product-media">
           {image ? <Image src={image.url} alt={image.alt} fill className="object-cover" /> : null}
         </div>
         <div className="space-y-5 p-5">
