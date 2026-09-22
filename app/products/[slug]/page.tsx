@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { CSSProperties } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { getPublicProductBySlug } from "@/lib/catalog";
 import { formatCredits, toPersianDigits } from "@/lib/persian";
@@ -27,13 +28,14 @@ export default async function ProductPage({ params }: { params: { slug: string }
     }
   } as const;
   const details = detailsByCategory[product.category.slug as keyof typeof detailsByCategory] ?? detailsByCategory.daily;
+  const mediaStyle = image ? ({ "--halftone-mask": `url("${image.url}")` } as CSSProperties) : undefined;
 
   return (
     <>
       <SiteHeader />
       <main className="shell pb-20">
         <section className="glass feature-card grid gap-8 p-8 lg:grid-cols-[.9fr_1.1fr]" data-chamfer="br" data-cut="44" data-radius="12" data-fillet="12">
-          <div className="product-media feature-card relative min-h-[420px]" data-chamfer="tr" data-cut="30" data-radius="12" data-fillet="10">
+          <div className="product-media feature-card relative min-h-[420px]" style={mediaStyle} data-chamfer="tr" data-cut="30" data-radius="12" data-fillet="10">
             {image ? <Image src={image.url} alt={image.alt} fill className="object-cover" priority /> : null}
           </div>
           <div className="space-y-6">

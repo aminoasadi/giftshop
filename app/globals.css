@@ -413,18 +413,24 @@ textarea {
 .hero-gift-panel::before {
   content: "";
   position: absolute;
-  inset: 7%;
+  inset: 0;
   z-index: 2;
   pointer-events: none;
   background:
     radial-gradient(circle, rgba(244, 247, 249, .42) 0 1.25px, transparent 1.45px),
     radial-gradient(circle, rgba(4, 16, 28, .58) 0 1px, transparent 1.2px);
-  background-position: 0 0, 4px 4px;
+  background-position: center, calc(50% + 4px) calc(50% + 4px);
   background-size: 8px 8px, 8px 8px;
   mix-blend-mode: overlay;
   opacity: .72;
-  mask-image: radial-gradient(circle at 50% 48%, #000 0 62%, transparent 82%);
-  -webkit-mask-image: radial-gradient(circle at 50% 48%, #000 0 62%, transparent 82%);
+  mask-image: url("/hero-credit-gift.png");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-image: url("/hero-credit-gift.png");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
 }
 
 .section-block {
@@ -489,6 +495,14 @@ textarea {
   background-size: 8px 8px, 8px 8px;
   mix-blend-mode: overlay;
   opacity: .72;
+  mask-image: var(--halftone-mask);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  -webkit-mask-image: var(--halftone-mask);
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
 }
 
 .checkout-form,
